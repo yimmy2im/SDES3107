@@ -12,15 +12,3 @@ ellipse(mouseX,mouseY * 2,11,11);
 rect(mouseX,mouseY,22,22);
 }
 
-
-void setup() {
-size(500,500); 
-smooth(); 
-noStroke();
-}
-
-void draw() {
-image(lineImage, mouseX-lineImage.width/2, mouseY);
-}
-}
-

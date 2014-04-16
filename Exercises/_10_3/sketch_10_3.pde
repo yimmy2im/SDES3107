@@ -1,0 +1,10 @@
+size(400,400);
+PImage img;
+img = loadImage("clean.png");
+background(255);
+image(img, 0, 0);
+image(img, -100, 0);
+image(img, -200, 0);
+image(img, -300, 0);
+image(img, 100, 0);
+image(img, 200, 0);

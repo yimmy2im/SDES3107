@@ -8,19 +8,19 @@ class Agent {
   Agent() {
     p = new PVector(random(width),random(height));
     pOld = new PVector(p.x,p.y);
-    stepSize = random(1,40);//stepSize to 40
+    stepSize = random(1,12);
   }
 
   void update1(){
-    angle = noise(p.x/noiseScale,p.y/noiseScale) * noiseStrength;
+    angle = noise(p.x*1,p.y*1) * noiseStrength*2;
 
-    p.x += cos(angle) * stepSize;
-    p.y += sin(angle) * stepSize;
+    p.x += cos(angle) * stepSize*2;
+    p.y += sin(angle) * stepSize*2;
 
-    if(p.x<-10) isOutside = true;
-    else if(p.x>width+10) isOutside = true;
+    if(p.x<-20) isOutside = true;
+    else if(p.x>width+20) isOutside = true;
     else if(p.y<-10) isOutside = true;
-    else if(p.y>height+10) isOutside = true;
+    else if(p.y>height+20) isOutside = true;
 
     if (isOutside) {
       p.x = random(width);

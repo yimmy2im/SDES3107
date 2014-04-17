@@ -1,15 +1,11 @@
 // I rework M_1_5_02_TOOL.pde
-//add a white rectangle in the centre
-//change the size of the screen to 1080x720
-//change the stroke to 3
-//also the gui background to neon green
-//stepSize to 40
+//change the strokeWidth to 1 so the lines look like bacteria under microscope
 
 /**
  * noise values (noise 2d) are used to animate a bunch of agents.
  * 
  * KEYS
- * m                   : toogle menu open/close
+ * `/~                 : toogle menu open/close
  * 1-2                 : switch noise mode
  * space               : new noise seed
  * backspace           : clear screen
@@ -21,20 +17,23 @@ import java.util.Calendar;
 
 
 // ------ agent2s ------
-Agent[] agents = new Agent[10000]; // create more ... to fit max slider agentsCount
-int agentsCount = 4000;
-float noiseScale = 300, noiseStrength = 10; 
-float overlayAlpha = 10, agentsAlpha = 90, strokeWidth = 0.3;
+Agent[] agents = new Agent[100000]; // create more ... to fit max slider agentsCount
+int agentsCount = 400;
+float noiseScale = 30, noiseStrength = 10; 
+float overlayAlpha = 100, agentsAlpha = 90, strokeWidth = 1;//heavy stroke
 int drawMode = 1;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
 boolean showGUI = false;
 Slider[] sliders;
-
+PImage img;//load the wallpaper of bacteria
 
 void setup(){
-  size(1080,700,P2D);//change to smaller size
+  
+
+  size(794,794,P2D);//change to smaller size
+  
   smooth();
 
   for(int i=0; i<agents.length; i++) {
@@ -46,11 +45,11 @@ void setup(){
 
 
 void draw(){
-  fill(255, overlayAlpha);//change the background to aquablue
   noStroke();
-  rect(30,30,1020,640);//add the rectangle 
+ img = loadImage("bacteria.jpeg");
+ image(img, 0, 0);
 
-  stroke(3, agentsAlpha);//set the stroke to 3
+  stroke(1, agentsAlpha);//set the stroke to 1
   //draw agents
   if (drawMode == 1) {
     for(int i=0; i<agentsCount; i++) agents[i].update1();
@@ -63,7 +62,7 @@ void draw(){
 
 
 void keyReleased(){
-  if(key=='m' || key=='M') {
+  if(key=='`' || key=='~') { //change to "`","`"
     showGUI = controlP5.group("menu").isOpen();
     showGUI = !showGUI;
   }
@@ -74,7 +73,7 @@ void keyReleased(){
   if (key == '2') drawMode = 2;
   if (key=='s' || key=='S') saveFrame(timestamp()+".png");
   if (key == ' ') {
-    int newNoiseSeed = (int) random(100000);
+    int newNoiseSeed = (int) random(100);
     println("newNoiseSeed: "+newNoiseSeed);
     noiseSeed(newNoiseSeed);
   }

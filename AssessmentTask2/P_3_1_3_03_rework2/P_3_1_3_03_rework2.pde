@@ -1,8 +1,9 @@
 // I reworked P_3_1_3_03.pde
+//abstract wallpaper and many rectangles create an illusion.
 
 /**
  * analysing and sorting the letters of a text 
- * drawing the letters frequency with two types of ellipses
+ * drawing the letters frequency with two types of rectangles
  *
  * MOUSE
  * position x          : random angle
@@ -10,8 +11,8 @@
  *
  * KEYS
  * 1                   : toggle alpha mode
- * 2                   : toggle drawing of ellipses2
- * 3                   : toggle drawing of ellipses
+ * 2                   : toggle drawing of rectangles2
+ * 3                   : toggle drawing of rectangle
  * 4                   : toggle drawing of text
  * s                   : save png
  * p                   : save pdf
@@ -37,10 +38,11 @@ int tracking = 27;//change the tracking to 27
 int actRandomSeed = 0;
 
 boolean drawAlpha = true;
-boolean drawEllipses2 = true;
-boolean drawEllipses = true;
+boolean drawRectangle2 = true;
+boolean drawRectangle = true;
 boolean drawText = false;
 
+PImage img;
 
 void setup() {
   size(1100, 700);//change into smaller size
@@ -58,7 +60,8 @@ void draw() {
 
   colorMode(HSB, 360, 100, 100, 100);//Back to HSB mode
   textFont(font);
-  background(20,30,10);//change the background to darker blue
+ img = loadImage("ab_wallpaper.jpg");
+ image(img, 0, 0);
   noStroke();
   smooth();
   textSize(40);//change the font size to 40
@@ -94,11 +97,14 @@ void draw() {
     pushMatrix();
     translate(posX, posY);
     stroke(220, 73, 51, charAlpha);
-    fill(220, 73, 51);
-    if (drawEllipses2) ellipse(3, 3, newPosX*2, newPosY);//change the ellipse2 position to 3,3
+    fill(mouseY/3,220, 73, 51);
+    rotate(PI/5);//rotate the rectangles
+    if (drawRectangle) rect(0, 0, newPosX*2, newPosY*2);
     noStroke();
-    fill(52, 10, 101, charAlpha);
-    if (drawEllipses) ellipse(0, 0, newPosX, newPosY*2);
+    fill(mouseX/4,52, 100, 101);
+    rotate(PI/5);//rotate the rectangles
+    if (drawRectangle) rect(0, 0, newPosX, newPosY);
+    
     popMatrix();
 
     posX += textWidth(joinedText.charAt(i));
@@ -184,8 +190,8 @@ void keyReleased(){
   if (key=='p' || key=='P') savePDF = true;
 
   if (key == '1') drawAlpha = !drawAlpha;
-  if (key == '2') drawEllipses2 = !drawEllipses2;
-  if (key == '3') drawEllipses = !drawEllipses;
+  if (key == '2') drawRectangle2 = !drawRectangle2;
+  if (key == '3') drawRectangle = !drawRectangle;
   if (key == '4') drawText = !drawText;
 }
 

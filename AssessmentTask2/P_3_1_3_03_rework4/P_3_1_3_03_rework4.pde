@@ -58,10 +58,10 @@ void draw() {
 
   colorMode(HSB, 360, 100, 100, 100);
   textFont(font);
-  background(mouseY/4, 100,100,100);//change colour by moving the cursor
+  background(mouseY/4, 100,100,100);//changing colour by moving the cursor
   noStroke();
   smooth();
-  textSize(mouseX/20);//change the text size by moving the cursor 
+  textSize(mouseX/20);//changing text size by moving the cursor 
 
   posX = 40;
   posY = 100;
@@ -93,12 +93,13 @@ void draw() {
     // ------ draw elements ------
     pushMatrix();
     translate(posX, posY);
-    stroke(23, 103, 251, charAlpha);//change line colour to orange
-    strokeWeight(5);//add stroke weight to the lines
+    stroke(mouseX/3,100,50,100);//changing color when the cursor moves
+    strokeWeight(2);//add stroke weight to the lines
     if (drawLines) line(0, 0, newPosX, newPosY);
     noStroke();//no stroke for ellipses
-    fill(152, 100, 71, charAlpha);//change ellipse colour to green
-    if (drawEllipses) ellipse(0, 0, charSize/2, charSize/2);
+    fill(mouseY/2, 50,100,100);//changing color when the cursor moves
+    
+    if (drawEllipses) ellipse(0, 0, charSize/2-10, charSize/2-10);
     popMatrix();
 
     posX += textWidth(joinedText.charAt(i));
@@ -111,7 +112,7 @@ void draw() {
   // ------ draw letters ------
   if (drawText) {
     posX = 80;
-    posY = 300;
+    posY = 100;
     randomSeed(actRandomSeed);
 
     for (int i = 0; i < joinedText.length(); i++) {

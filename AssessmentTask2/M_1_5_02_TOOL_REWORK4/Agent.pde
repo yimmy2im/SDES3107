@@ -9,8 +9,8 @@ class Agent {
   boolean isOutside = false;
 
   Agent() {
-     p = new PVector(20,30);//no running randomly
-    pOld = new PVector(30.1,70.1);//also set the accurate location
+     p = new PVector(0,20);//no running randomly
+    pOld = new PVector(2.1,8.1);//also set the accurate location
     stepSize = random(1);//thinner stepsize
   }
 

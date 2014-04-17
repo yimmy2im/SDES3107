@@ -41,7 +41,7 @@ boolean drawAlpha = true;
 boolean drawLines = true;
 boolean drawTriangles = true;//change to triangle
 boolean drawText = false;
-
+PImage img;
 
 void setup() {
   size(1000, 600);//change the screen smaller
@@ -59,14 +59,16 @@ void draw() {
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
 
   colorMode(HSB, 360, 100, 100, 100);
+  img = loadImage("wg.jpeg");//load the galaxy background
+ image(img,0,0);
+ 
   textFont(font);
-  background(3,10,30);//change the colour to darker gray
   noStroke();
   smooth();
   textSize(30);//also a bigger size of text
 
-  posX = 40;//change the location
-  posY = 310;/change the location to lower
+ posX = 40;//change the location
+  posY = 200;//change the location to lower
   float oldX = 0;
   float oldY = 0;
   randomSeed(actRandomSeed);
@@ -83,9 +85,9 @@ void draw() {
     float charAlpha = 100;
     if (drawAlpha) charAlpha = counters[index];
    
-    float my = map(mouseY,100,height-20, 0,1);
+    float my = map(mouseY,100,height-40, 0,1);
     my = constrain(my, 0, 1);
-    float charSize = counters[index] * my * 2;
+    float charSize = counters[index] * my * 4;
    
 
 
@@ -100,11 +102,11 @@ void draw() {
     pushMatrix();
     translate(posX, posY);
   
-    stroke(173, 73, 151, charAlpha);//change the colour to neon blue
+    stroke(mouseX/4, 173, 73, 151);//colour changes when the cursor moves
     strokeWeight(2);//add strokeWeight to 2
     fill(random(0,100),100,100); 
     if (drawLines) line(0, 0, mouseY/2, mouseX/4);//change the position
-    fill(random(0,100),100,100);//mouse pressed so the colour of triangles changes randomly
+    fill(random(0,100),100,100);//colour of triangles changes randomly when mouse pressed
   
     if (drawTriangles)triangle(60, 10, 25, 60, 75, 65);//change the shape to triangle
     popMatrix();

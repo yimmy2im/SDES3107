@@ -1,7 +1,7 @@
 // I reworked P_3_1_3_03.pde
 
 /**
- * analysing and sorting the letters of a text (Bruno Mars' song -Just the way you are) 
+ * analysing and sorting the letters of a text 
  * drawing the letters frequency with lines and ellipses
  * Bruno mars is singing his song with you while you are moving your mouse
  
@@ -43,39 +43,42 @@ boolean drawLines = true;
 boolean drawEllipses = true;
 boolean drawText = false;
 
-PImage alphaImg;//load transpency bg image-bruno_head
+PImage alphaImg;//load transpency bg image : bruno_head
+PImage img;
 
 
 void setup() {
   size(1100, 700);//set a smaller screen
-  lines = loadStrings("bruno_mars.txt");//change the text file to bruno mars lyrics
+  lines = loadStrings("bruno_mars.txt");//change the words from the old text file
   joinedText = join(lines, " ");
 
   font = loadFont("HillHouse-50.vlw");//Create and load new font "HillHouse"
   alphaImg = loadImage("bruno_head.png");//load image for the cursor
   countCharacters();
   
+  
 }
 
 
 void draw() {
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
+  img = loadImage("concert.jpeg");
+  image(img, 0, 0);
   
   colorMode(RGB,360,100,100,100);//change the colour mode to RGB
   textFont(font);
-  background(255);
   noStroke();
   smooth();
-  textSize(40);//change the font size to 40
+  textSize(50);//change the font size to 50
   
    int ix = mouseX - alphaImg.width/2;  //load the img to cursor
    int iy = mouseY - alphaImg.height/2;
    image(alphaImg,ix, iy);
  
   
-  posX = 90;
-  posY = 300;
-
+  posX = 130;
+  posY = 600;
+  
 
   // ------ draw lines and ellipses ------  
   for (int i = 0; i < joinedText.length(); i++) {
@@ -103,10 +106,13 @@ void draw() {
     // ------ draw elements ------
     pushMatrix();
     translate(posX, posY);
-    stroke(200, 23, 21, charAlpha);//change the stroke to red
-    strokeWeight(5);//add strokeweight for the lines and ellipse
+    stroke(30, 123, 300, charAlpha);
+    
+    strokeWeight(3);//add strokeweight for the lines and ellipse
+    
     if (drawLines) line(0,0, mouseX/10, newPosY);// lines move when mouseX move
-    fill(52, 100, 71, charAlpha);//change the ellipse colour to green
+    fill(0);//change the ellipse colour to black
+    
     if (drawEllipses) ellipse(0, 0, mouseX/10,mouseY/10);//size changes while you move the mouse around
     popMatrix();
 
@@ -124,7 +130,7 @@ void draw() {
   // ------ draw letters ------
   if (drawText) {
     posX = 80;
-    posY = 300;
+    posY = 400;
 
 
     for (int i = 0; i < joinedText.length(); i++) {

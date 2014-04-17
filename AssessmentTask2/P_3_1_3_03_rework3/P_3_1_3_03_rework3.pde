@@ -1,4 +1,5 @@
 // i reworked for P_3_1_3_03.pde
+//set the cursor to gun shot target
 
 /**
  * analysing and sorting the letters of a text 
@@ -41,6 +42,7 @@ boolean drawRectangles = true;
 boolean drawEllipses = true;
 boolean drawText = false;
 
+PImage alphaImg;
 
 void setup() {
   size(1040, 560);
@@ -49,7 +51,7 @@ void setup() {
   joinedText = join(lines, " ");
 
   font = createFont("Courier", 10);
-
+ alphaImg = loadImage("tg.png");
   countCharacters();
 }
 
@@ -67,6 +69,10 @@ void draw() {
   noStroke();
   smooth();
   textSize(45);//change the font size to 45
+  
+  int ix = mouseX - alphaImg.width;
+  int iy = mouseY - alphaImg.height;
+  image(alphaImg, ix, iy);
 
   posX = 80;
   posY = 100;

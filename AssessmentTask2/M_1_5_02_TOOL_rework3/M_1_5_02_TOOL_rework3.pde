@@ -1,7 +1,7 @@
 // i reworked for M_1_5_02_TOOL.pde
 // Agent.pde, GUI.pde
-// Dark background then mouse pressed, 3 shapes appeal and shown an orange colour background
-//see through the lines run inside the 3 orange colour shapes
+//  spiral pattern appeals when mouse pressed, also
+//shown an orange colour background,see through the lines run inside spiral
 
 /**
  * noise values (noise 2d) are used to animate a bunch of agents.
@@ -22,7 +22,7 @@ import java.util.Calendar;
 Agent[] agents = new Agent[10000]; // create more ... to fit max slider agentsCount
 int agentsCount = 4000;
 float noiseScale = 300, noiseStrength = 10; 
-float overlayAlpha = 10, agentsAlpha = 90, strokeWidth = 0.3;
+float overlayAlpha = 10, agentsAlpha = 90, strokeWidth = 0.4;
 int drawMode = 1;
 
 // ------ ControlP5 ------
@@ -49,11 +49,18 @@ void draw(){
 
   noStroke();
   if (mousePressed == true) {
-  fill(250,100,20); } else { //pressed to be orange colour
-     fill(10); }//dark gray colour for the shapes
-  rect(60,210,350,350); //left hand rectangle
-  ellipse(645,400,350,350);//ellipse
-  rect(880,210,350,350); //right hand rectangle
+  fill(250,100,20); } else { //pressed and show orange colour
+     fill(10); }//dark gray colour for the spiral
+
+smooth();
+ float radius = 10.0;//set up the spiral
+for (int deg = 0; deg < 360*70; deg += 7) {
+float angle = radians(deg);
+float x = 630 + (cos(angle) * radius);
+float y = 450 + (sin(angle) * radius);
+ellipse(x, y, 35, 35);
+radius = radius + 0.80;
+}
 
   stroke(0, agentsAlpha);
   //draw agents
